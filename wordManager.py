@@ -18,39 +18,42 @@ class WordManager:
 		self.connectionVal = []
 		self.terminationVal = []
 		self.objectiveVal = []
-		initializeManager()
+
+		self.initializeManager()
 
 	def GetTerminationStringByIndex(self, terminationIndex):
-		return terminationList[terminationIndex];
+		return self.terminationList[terminationIndex]
 
 	def GetSubjectiveStringByIndex(self, subjectiveIndex):
-		return subjectiveList[subjectiveIndex];
+		return self.subjectiveList[subjectiveIndex]
 
 	def GetVerbStringByIndex(self, verbIndex):
-		return verbList[verbIndex];
+		return self.verbList[verbIndex]
 
 	def GetObjectiveStringByIndex(self, objectiveIndex):
-		return objectiveList[objectiveIndex];
+		return self.objectiveList[objectiveIndex]
 
 	def GetConnectionStringByIndex(self, connectionIndex):
-		return connectionList[connectionIndex];
+		return self.connectionList[connectionIndex]
 
 	def GetSubjectiveListLength(self):
-		return len(subjectiveList);
+		return len(self.subjectiveList)
 
 	def GetVerbListLength(self):
-		return len(verbList);
+		return len(self.verbList)
 
 	def GetObjectiveListLength(self):
-		return len(objectiveList);
+		return len(self.objectiveList)
 
 	def GetconnectionListLength(self):
-		return len(connectionList);
+		return len(self.connectionList)
 
 	def GetterminationListLength(self):
-		return len(terminationList);
+		return len(self.terminationList)
 
 	def EvaluateChromesomeEmotion(self, chromosome):
+    	# TODO : implementation
+		return True
 
 	def initializeManager(self):
 		self.subjectiveList = ["I", "You", "We", "They", "He", "She", "It"]
