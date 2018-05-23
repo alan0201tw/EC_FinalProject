@@ -2,6 +2,7 @@ import sys
 sys.path.append("../chromosomeLib.py")
 
 import chromosomeLib
+import random
 
 class World :
     def __init__(self):
@@ -14,10 +15,11 @@ class World :
             if self.CompareFitness(self.chromosomes[i].getFitness() , self.chromosomes[self.bestFitnessIndex].getFitness()):
                 self.bestFitnessIndex = i
 
-    # determine whether A or B has better fitness
+    # determine whether A or B has better fitness, return True if fitnessA is better than fitnessB
     def CompareFitness(self , fitnessA , fitnessB) :
         # TODO
-        return True
+        return fitnessA < fitnessB
+        #return True
 
     # return fitness only
     def GetBestFitness(self) :
@@ -39,4 +41,23 @@ class World :
     # return 2 index representing two parents
     def ParentSelection(self):
         # TODO
-        return 0 , 1
+        parentA , parentB = -1,-1
+
+        # decide parentA
+        indexList = range(0,len(self.chromosomes))
+        tmpParentList = random.sample(indexList , 2)
+        # if index 0 is better
+        if self.CompareFitness(self.chromosomes[tmpParentList[0]].getGitness() , self.chromosomes[tmpParentList[1]].getGitness() ) :
+            parentA = tmpParentList[0]
+        else :
+            parentA = tmpParentList[1]
+
+        # decide parentB
+        tmpParentList = random.sample(indexList , 2)
+        # if index 0 is better
+        if self.CompareFitness(self.chromosomes[tmpParentList[0]].getGitness() , self.chromosomes[tmpParentList[1]].getGitness() ) :
+            parentB = tmpParentList[0]
+        else :
+            parentB = tmpParentList[1]
+
+        return parentA , parentB

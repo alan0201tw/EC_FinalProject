@@ -49,6 +49,7 @@ class WordManager:
 		return True
 
 	def initializeManager(self):
+    	# TODO : Read from file, rather than hard coded in script
 		self.subjectiveList = ["I", "You", "We", "They", "He", "She", "It"]
 
 		self.verbList = ["be", "have", "do", "say", "go", "get", "make", "know", "think", "take",\

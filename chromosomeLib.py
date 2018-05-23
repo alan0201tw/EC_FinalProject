@@ -1,5 +1,10 @@
 from random import randint, randrange
 
+import sys
+sys.path.append("../wordManagerLib.py")
+
+import wordManagerLib as WordManager
+
 class Sentence:
     def __init__(self, startPhrase, followUpPhrases, terminationIndex):
         self.startPhrase = startPhrase # phrase
