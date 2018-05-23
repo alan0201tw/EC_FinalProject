@@ -1,0 +1,8 @@
+kill
+hit
+like
+love
+hate
+understand
+know
+recognize

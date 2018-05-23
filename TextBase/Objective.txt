@@ -1,0 +1,15 @@
+bomb
+fish
+friend
+school
+apple
+robot
+machine
+computer
+book
+tissue
+bowl
+pillow
+wallet
+water
+fire

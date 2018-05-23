@@ -1,10 +1,5 @@
 from random import randint, randrange
 
-import sys
-sys.path.append("../wordManagerLib.py")
-
-import wordManagerLib as WordManager
-
 class Sentence:
     def __init__(self, startPhrase, followUpPhrases, terminationIndex):
         self.startPhrase = startPhrase # phrase
@@ -12,9 +7,9 @@ class Sentence:
         self.terminationIndex = terminationIndex # int
     
     def toString(self, WordManager):
-        startPhraseString = self.startPhrase.toString()
+        startPhraseString = self.startPhrase.toString(WordManager)
         if len(self.followUpPhrases) > 0:
-            followUpPhrasesStringList = [i.toString() for i in self.followUpPhrases]
+            followUpPhrasesStringList = [i.toString(WordManager) for i in self.followUpPhrases]
             followUpPhrasesString = " ".join(followUpPhrasesStringList)
         else:
             followUpPhrasesString = ""
@@ -92,13 +87,16 @@ class Chromosome:
     # sibling, choromesome
     def __init__(self, WordManager, parentA = None, parentB = None, \
         siblingSentence = None ,maxSentenceNum = 5, maxPhraseInASentenceNum = 3):
+        # record wordmanager
+        self.wordmanager = WordManager
+
         # generate child using crossover
         if parentA is not None and parentB is not None:
             # generate sibling
             if siblingSentence != None:
                 self.generation = parentA.getGeneration()+1
                 self.sentences = siblingSentence
-                self.fitness = WordManager.EvaluateChromesomeEmotion(self.sentences)
+                self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
                 self.siblingSentence = None
                 self.sibling = None
             # doing crossover
@@ -122,10 +120,10 @@ class Chromosome:
                     self.sentences = parentA.sentences
                     self.siblingSentence = parentB.sentences
                 
-                self.fitness = WordManager.EvaluateChromesomeEmotion(self.sentences)
+                self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
                 # do crossover will generate two childern, store it to sibling
                 self.sibling = Chromosome(\
-                    WordManager=WordManager, parentA=parentA, parentB=parentB,\
+                    WordManager=self.wordmanager, parentA=parentA, parentB=parentB,\
                     siblingSentence = self.siblingSentence)
 
         # 0th generation, generate sentence randomely
@@ -137,11 +135,11 @@ class Chromosome:
             
             sentenceNum = randint(1, maxSentenceNum)
             # get length of list in the WordManager
-            subjectiveListLength = WordManager.GetSubjectiveListLength()
-            verbListLength = WordManager.GetVerbListLength()
-            objectiveListLength = WordManager.GetObjectiveListLength()
-            connectionListLength = WordManager.GetconnectionListLength()
-            terminationListLength = WordManager.GetterminationListLength()
+            subjectiveListLength = self.wordmanager.GetSubjectiveListLength()
+            verbListLength = self.wordmanager.GetVerbListLength()
+            objectiveListLength = self.wordmanager.GetObjectiveListLength()
+            connectionListLength = self.wordmanager.GetconnectionListLength()
+            terminationListLength = self.wordmanager.GetterminationListLength()
             for i_s in range(sentenceNum):
                 phraseNum = randint(1, maxPhraseInASentenceNum)
 
@@ -170,7 +168,7 @@ class Chromosome:
                     terminationIndex))
 
             # update fitness value
-            self.fitness = WordManager.EvaluateChromesomeEmotion(self.sentences)
+            self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
     
     def compareTo(self, other):
         myFitness = self.fitness
@@ -184,7 +182,7 @@ class Chromosome:
             return -1
 
     def toString(self):
-        sentencesList = [i.toString() for i in self.sentences]
+        sentencesList = [i.toString(self.wordmanager) for i in self.sentences]
         return " ".join(sentencesList)
     
     # return sibling

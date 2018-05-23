@@ -5,9 +5,11 @@ import chromosomeLib
 import random
 
 class World :
-    def __init__(self):
+    def __init__(self , WordManager):
+        self.wordManager = WordManager
+
         self.currentGeneration = 0   # generation index > int
-        self.chromosomes = [chromosomeLib.Chromosome for i in range(10)]        # chromosomes > list of chromosome
+        self.chromosomes = [chromosomeLib.Chromosome(self.wordManager) for i in range(10)]        # chromosomes > list of chromosome
         # use this to access best fitness chromosome
         self.bestFitnessIndex = 0
 
@@ -33,7 +35,7 @@ class World :
         nextGenerationchromosomes = []
         for i in range(len(self.chromosomes)):
             parentA , parentB = self.ParentSelection()
-            nextGenerationchromosomes[i] = chromosomeLib.Chromosome(self.chromosomes[parentA] , self.chromosomes[parentB])
+            nextGenerationchromosomes.append(chromosomeLib.Chromosome(self.wordManager , self.chromosomes[parentA] , self.chromosomes[parentB]))
         
         self.chromosomes = nextGenerationchromosomes
         self.currentGeneration += 1
@@ -46,8 +48,9 @@ class World :
         # decide parentA
         indexList = range(0,len(self.chromosomes))
         tmpParentList = random.sample(indexList , 2)
+
         # if index 0 is better
-        if self.CompareFitness(self.chromosomes[tmpParentList[0]].getGitness() , self.chromosomes[tmpParentList[1]].getGitness() ) :
+        if self.CompareFitness(self.chromosomes[tmpParentList[0]].getFitness() , self.chromosomes[tmpParentList[1]].getFitness() ) :
             parentA = tmpParentList[0]
         else :
             parentA = tmpParentList[1]
@@ -55,7 +58,7 @@ class World :
         # decide parentB
         tmpParentList = random.sample(indexList , 2)
         # if index 0 is better
-        if self.CompareFitness(self.chromosomes[tmpParentList[0]].getGitness() , self.chromosomes[tmpParentList[1]].getGitness() ) :
+        if self.CompareFitness(self.chromosomes[tmpParentList[0]].getFitness() , self.chromosomes[tmpParentList[1]].getFitness() ) :
             parentB = tmpParentList[0]
         else :
             parentB = tmpParentList[1]
