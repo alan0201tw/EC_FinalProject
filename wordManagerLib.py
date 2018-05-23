@@ -54,24 +54,26 @@ class WordManager:
 		# edit this to test!
 		targetEmotion = [ 0.0 , 1.0 , 0.0 ]
 		chromosomeEmotion = [ 0.0 , 0.0 , 0.0 ]
-		phraseCount = 0
+		phraseCount = 0.0
 
 		for sentenceIndex in range(len(sentences)) :
 			# deal with start phrase and each follow up phrase
-			chromosomeEmotion += self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].startPhrase.objectiveIndex], self.verbVal[sentences[sentenceIndex].startPhrase.verbIndex])
-			phraseCount += 1
+			t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].startPhrase.objectiveIndex], self.verbVal[sentences[sentenceIndex].startPhrase.verbIndex])
+			chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
+			phraseCount += 1.0
 
 			for followUpIndex in range(len(sentences[sentenceIndex].followUpPhrases)) :
-				chromosomeEmotion += self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].objectiveIndex],self.verbVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].verbIndex])
-				phraseCount += 1
+				t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].objectiveIndex],self.verbVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].verbIndex])
+				chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
+				phraseCount += 1.0
 
-		chromosomeEmotion = [i / phraseCount for i in chromosomeEmotion]
+		#chromosomeEmotion = [i / phraseCount for i in chromosomeEmotion]
 
 		difference = 0.0
 		
 		for index in range( len(targetEmotion) ) :
 			difference += abs(targetEmotion[index] - chromosomeEmotion[index])
- 
+		#print("chromosomeEmotion = " , chromosomeEmotion)
 		return difference
 
 	def initializeManager(self):
