@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 class WordManager:
 	def __init__(self):
 		self.subjectiveList = []
