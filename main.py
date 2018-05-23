@@ -17,7 +17,7 @@ def main() :
         print( "--------GENERATION " , generationIndex , "--------" )
         print( "Best fitness is :" , world.GetBestFitness() )
         print( "Best chromosome is :" , world.GetBestFitnesschromosome().toString() )
-        print( "------------------------------------------------" )
+        #print( "------------------------------------------------" )
         world.ToNextGeneration()
         generationIndex += 1
 

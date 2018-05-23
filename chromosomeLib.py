@@ -10,7 +10,7 @@ class Sentence:
         startPhraseString = self.startPhrase.toString(WordManager)
         if len(self.followUpPhrases) > 0:
             followUpPhrasesStringList = [i.toString(WordManager) for i in self.followUpPhrases]
-            followUpPhrasesString = " ".join(followUpPhrasesStringList)
+            followUpPhrasesString = "".join(followUpPhrasesStringList)
         else:
             followUpPhrasesString = ""
         sentenceString = startPhraseString + followUpPhrasesString
@@ -183,7 +183,7 @@ class Chromosome:
 
     def toString(self):
         sentencesList = [i.toString(self.wordmanager) for i in self.sentences]
-        return " ".join(sentencesList)
+        return "".join(sentencesList)
     
     # return sibling
     def getSibling(self):

@@ -9,7 +9,7 @@ class World :
         self.wordManager = WordManager
 
         self.currentGeneration = 0   # generation index > int
-        self.chromosomes = [chromosomeLib.Chromosome(self.wordManager) for i in range(10)]        # chromosomes > list of chromosome
+        self.chromosomes = [chromosomeLib.Chromosome(self.wordManager) for i in range(100)]        # chromosomes > list of chromosome
         # use this to access best fitness chromosome
         self.bestFitnessIndex = 0
 
