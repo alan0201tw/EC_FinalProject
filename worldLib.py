@@ -1,6 +1,3 @@
-import sys
-sys.path.append("../chromosomeLib.py")
-
 import chromosomeLib
 import random
 

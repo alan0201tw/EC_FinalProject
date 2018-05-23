@@ -1,8 +1,3 @@
-import sys
-sys.path.append("../chromosomeLib.py")
-sys.path.append("../worldLib.py")
-sys.path.append("../wordManagerLib.py")
-
 import chromosomeLib
 import worldLib
 import wordManagerLib
