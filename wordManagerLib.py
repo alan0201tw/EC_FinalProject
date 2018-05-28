@@ -1,105 +1,107 @@
 class WordManager:
-	def __init__(self):
-		self.subjectiveList = []
-		self.verbList = []
-		self.objectiveList = []
-		self.connectionList = []
-		self.terminationList = []
+    def __init__(self):
+        self.subjectiveList = []
+        self.verbList = []
+        self.objectiveList = []
+        self.connectionList = []
+        self.terminationList = []
 
-		self.verbVal = []
-		self.objectiveVal = []
+        self.verbVal = []
+        self.objectiveVal = []
 
-		self.initializeManager()
+        self.textBaseDirName = "TextBase_Food/"
 
-	def GetTerminationStringByIndex(self, terminationIndex):
-		return self.terminationList[terminationIndex]
+        self.initializeManager()
 
-	def GetSubjectiveStringByIndex(self, subjectiveIndex):
-		return self.subjectiveList[subjectiveIndex]
+    def GetTerminationStringByIndex(self, terminationIndex):
+        return self.terminationList[terminationIndex]
 
-	def GetVerbStringByIndex(self, verbIndex):
-		return self.verbList[verbIndex]
+    def GetSubjectiveStringByIndex(self, subjectiveIndex):
+        return self.subjectiveList[subjectiveIndex]
 
-	def GetObjectiveStringByIndex(self, objectiveIndex):
-		return self.objectiveList[objectiveIndex]
+    def GetVerbStringByIndex(self, verbIndex):
+        return self.verbList[verbIndex]
 
-	def GetConnectionStringByIndex(self, connectionIndex):
-		return self.connectionList[connectionIndex]
+    def GetObjectiveStringByIndex(self, objectiveIndex):
+        return self.objectiveList[objectiveIndex]
 
-	def GetSubjectiveListLength(self):
-		return len(self.subjectiveList)
+    def GetConnectionStringByIndex(self, connectionIndex):
+        return self.connectionList[connectionIndex]
 
-	def GetVerbListLength(self):
-		return len(self.verbList)
+    def GetSubjectiveListLength(self):
+        return len(self.subjectiveList)
 
-	def GetObjectiveListLength(self):
-		return len(self.objectiveList)
+    def GetVerbListLength(self):
+        return len(self.verbList)
 
-	def GetconnectionListLength(self):
-		return len(self.connectionList)
+    def GetObjectiveListLength(self):
+        return len(self.objectiveList)
 
-	def GetterminationListLength(self):
-		return len(self.terminationList)
+    def GetconnectionListLength(self):
+        return len(self.connectionList)
 
-	def VectorMultiplication(self , vector , floatV):
+    def GetterminationListLength(self):
+        return len(self.terminationList)
 
-		#print("type(vector) = " , type(vector))	
-		#print("type(floatV) = " , type(floatV))	
-		
-		return [i * floatV for i in vector]
+    def VectorMultiplication(self , vector , floatV):
 
-	def EvaluateChromesomeEmotion(self, sentences):
-    	# TODO : implementation
+        #print("type(vector) = " , type(vector))	
+        #print("type(floatV) = " , type(floatV))	
+        
+        return [i * floatV for i in vector]
 
-		# edit this to test!
-		targetEmotion = [ 0.0 , 1.0 , 0.0 ]
-		chromosomeEmotion = [ 0.0 , 0.0 , 0.0 ]
-		phraseCount = 0.0
+    def EvaluateChromesomeEmotion(self, sentences):
+        # TODO : implementation
 
-		for sentenceIndex in range(len(sentences)) :
-			# deal with start phrase and each follow up phrase
-			t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].startPhrase.objectiveIndex], self.verbVal[sentences[sentenceIndex].startPhrase.verbIndex])
-			chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
-			phraseCount += 1.0
+        # edit this to test!
+        targetEmotion = [ 0.0 , 1.0 , 0.0 ]
+        chromosomeEmotion = [ 0.0 , 0.0 , 0.0 ]
+        phraseCount = 0.0
 
-			for followUpIndex in range(len(sentences[sentenceIndex].followUpPhrases)) :
-				t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].objectiveIndex],self.verbVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].verbIndex])
-				chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
-				phraseCount += 1.0
+        for sentenceIndex in range(len(sentences)) :
+            # deal with start phrase and each follow up phrase
+            t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].startPhrase.objectiveIndex], self.verbVal[sentences[sentenceIndex].startPhrase.verbIndex])
+            chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
+            phraseCount += 1.0
 
-		#chromosomeEmotion = [i / phraseCount for i in chromosomeEmotion]
+            for followUpIndex in range(len(sentences[sentenceIndex].followUpPhrases)) :
+                t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].objectiveIndex],self.verbVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].verbIndex])
+                chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
+                phraseCount += 1.0
 
-		difference = 0.0
-		
-		for index in range( len(targetEmotion) ) :
-			difference += abs(targetEmotion[index] - chromosomeEmotion[index])
-		#print("chromosomeEmotion = " , chromosomeEmotion)
-		return difference
+        #chromosomeEmotion = [i / phraseCount for i in chromosomeEmotion]
 
-	def initializeManager(self):
-    	# TODO : Read from file, rather than hard coded in script
-		#lines = [line.rstrip('\n') for line in open("TextBase/Subjective.txt")]
+        difference = 0.0
+        
+        for index in range( len(targetEmotion) ) :
+            difference += abs(targetEmotion[index] - chromosomeEmotion[index])
+        #print("chromosomeEmotion = " , chromosomeEmotion)
+        return difference
 
-		#self.subjectiveList = ["I", "You", "We", "They", "He", "She", "It"]
-		self.subjectiveList = [line.rstrip('\n') for line in open("TextBase/Subjective.txt")]
+    def initializeManager(self):
+        # TODO : Read from file, rather than hard coded in script
+        #lines = [line.rstrip('\n') for line in open("TextBase/Subjective.txt")]
 
-		#self.verbList = ["be", "have", "do", "say", "go", "get", "make", "know", "think", "take",\
-		#"see", "come", "want", "look", "use", "find", "give", "tell", "work", "call"]
-		self.verbList = [line.rstrip('\n') for line in open("TextBase/Verb.txt")]
+        #self.subjectiveList = ["I", "You", "We", "They", "He", "She", "It"]
+        self.subjectiveList = [line.rstrip('\n') for line in open(self.textBaseDirName+"Subjective.txt")]
 
-		#self.objectiveList = ["time", "people", "way", "thing", "life", "school", "state", \
-		#"problem", "questions", "home", "friend"]
-		self.objectiveList = [line.rstrip('\n') for line in open("TextBase/Objective.txt")]
+        #self.verbList = ["be", "have", "do", "say", "go", "get", "make", "know", "think", "take",\
+        #"see", "come", "want", "look", "use", "find", "give", "tell", "work", "call"]
+        self.verbList = [line.rstrip('\n') for line in open(self.textBaseDirName+"Verb.txt")]
 
-		self.connectionList = [" and", " ,"]
+        #self.objectiveList = ["time", "people", "way", "thing", "life", "school", "state", \
+        #"problem", "questions", "home", "friend"]
+        self.objectiveList = [line.rstrip('\n') for line in open(self.textBaseDirName+"Objective.txt")]
 
-		self.terminationList = [".","!"]
+        self.connectionList = [" and", " ,"]
 
-		self.verbVal = [line.rstrip('\n') for line in open("TextBase/VerbValue.txt")]
-		for index in range( len(self.verbVal) ) :
-			self.verbVal[index] = float(self.verbVal[index])
+        self.terminationList = [".","!"]
 
-		self.objectiveVal = [line.rstrip('\n') for line in open("TextBase/ObjectiveValue.txt")]
-		for index in range( len(self.objectiveVal) ) :
-			self.objectiveVal[index] = self.objectiveVal[index].split()
-			self.objectiveVal[index] = [float(i) for i in self.objectiveVal[index]]
+        self.verbVal = [line.rstrip('\n') for line in open(self.textBaseDirName+"VerbValue.txt")]
+        for index in range( len(self.verbVal) ) :
+            self.verbVal[index] = float(self.verbVal[index])
+
+        self.objectiveVal = [line.rstrip('\n') for line in open(self.textBaseDirName+"ObjectiveValue.txt")]
+        for index in range( len(self.objectiveVal) ) :
+            self.objectiveVal[index] = self.objectiveVal[index].split()
+            self.objectiveVal[index] = [float(i) for i in self.objectiveVal[index]]

@@ -1,0 +1,8 @@
+drink
+eat
+cook
+bake
+feed
+peel
+dice
+fry

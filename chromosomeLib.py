@@ -86,7 +86,7 @@ class Chromosome:
     # siblingSentence, list
     # sibling, choromesome
     def __init__(self, WordManager, parentA = None, parentB = None, \
-        siblingSentence = None ,maxSentenceNum = 5, maxPhraseInASentenceNum = 3):
+        siblingSentence = None ,maxSentenceNum = 15, maxPhraseInASentenceNum = 3):
         # record wordmanager
         self.wordmanager = WordManager
 
