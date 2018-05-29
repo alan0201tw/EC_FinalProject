@@ -85,8 +85,15 @@ class Chromosome:
     # fitness, int
     # siblingSentence, list
     # sibling, choromesome
-    def __init__(self, WordManager, parentA = None, parentB = None, \
-        siblingSentence = None ,maxSentenceNum = 15, maxPhraseInASentenceNum = 3):
+    def __init__(self, 
+                 WordManager, 
+                 parentA = None, 
+                 parentB = None, 
+                 siblingSentence = None ,
+                 maxSentenceNum = 15, 
+                 maxPhraseInASentenceNum = 3,
+                 minSentenceNum = 3,
+                 minPhraseInASentenceNum = 1):
         # record wordmanager
         self.wordmanager = WordManager
 
@@ -133,7 +140,7 @@ class Chromosome:
             self.siblingSentence = None
             self.sibling = None
             
-            sentenceNum = randint(1, maxSentenceNum)
+            sentenceNum = randint(minSentenceNum, maxSentenceNum)
             # get length of list in the WordManager
             subjectiveListLength = self.wordmanager.GetSubjectiveListLength()
             verbListLength = self.wordmanager.GetVerbListLength()
@@ -141,7 +148,7 @@ class Chromosome:
             connectionListLength = self.wordmanager.GetconnectionListLength()
             terminationListLength = self.wordmanager.GetterminationListLength()
             for i_s in range(sentenceNum):
-                phraseNum = randint(1, maxPhraseInASentenceNum)
+                phraseNum = randint(minPhraseInASentenceNum, maxPhraseInASentenceNum)
 
                 # start phrase
                 subjectiveIndex = randrange(subjectiveListLength)
