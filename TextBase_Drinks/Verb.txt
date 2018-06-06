@@ -1,0 +1,18 @@
+Buy a cup of
+Buy a bottle of
+drink a cup of
+Drink a bottle of
+Get a cup of
+Get a bottle of
+Want a cup of
+Want a bottle of
+Provide a cup of
+Provide a bottle of
+Sell a cup of
+Sell a bottle of
+Have a cup of
+Have a bottle of
+See a cup of
+See a bottle of
+Would like a cup of
+Would like a bottle of

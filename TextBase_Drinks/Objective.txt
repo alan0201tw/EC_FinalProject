@@ -1,0 +1,13 @@
+Coke
+Sprite
+Fanta
+Martini
+Margarita
+Bloody Mary
+Sex on the beach
+Long Island iced tea
+Whiskey
+Water
+Root beer
+Lemonade
+Pepsi
