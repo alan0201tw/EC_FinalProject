@@ -103,7 +103,7 @@ class Chromosome:
             if siblingSentence != None:
                 self.generation = parentA.getGeneration()+1
                 self.sentences = siblingSentence
-                self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
+                self.fitness = self.wordmanager.EvaluateChromesomeEmotionByAPI(self.sentences)
                 self.siblingSentence = None
                 self.sibling = None
             # doing crossover
@@ -127,7 +127,7 @@ class Chromosome:
                     self.sentences = parentA.sentences
                     self.siblingSentence = parentB.sentences
                 
-                self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
+                self.fitness = self.wordmanager.EvaluateChromesomeEmotionByAPI(self.sentences)
                 # do crossover will generate two childern, store it to sibling
                 self.sibling = Chromosome(\
                     WordManager=self.wordmanager, parentA=parentA, parentB=parentB,\
@@ -175,7 +175,7 @@ class Chromosome:
                     terminationIndex))
 
             # update fitness value
-            self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
+            self.fitness = self.wordmanager.EvaluateChromesomeEmotionByAPI(self.sentences)
     
     def compareTo(self, other):
         myFitness = self.fitness

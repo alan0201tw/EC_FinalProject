@@ -1,3 +1,5 @@
+from API_handler import get_sentimental_score
+
 class WordManager:
     def __init__(self):
         self.subjectiveList = []
@@ -49,6 +51,23 @@ class WordManager:
         #print("type(floatV) = " , type(floatV))	
         
         return [i * floatV for i in vector]
+
+    def EvaluateChromesomeEmotionByAPI(self, sentences):
+        """
+        Using azure text analytics API to get sentimental scores
+        """
+        #TODO:
+        # how to trun sentence to string...
+        w = WordManager()
+        sentencesStr = []
+        for i in sentences:
+            sentencesStr.append(i.toString(w))
+        sentimentJson = get_sentimental_score(sentencesStr)
+        sentencesScore = sentimentJson["documents"]
+        scores = 0
+        for i in sentencesScore:
+            scores += i["score"]
+        return scores/len(sentencesScore)
 
     def EvaluateChromesomeEmotion(self, sentences):
         # TODO : implementation
