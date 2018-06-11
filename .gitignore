@@ -1,2 +1,5 @@
 # Byte-compiled
 __pycache__/
+
+#virtualenv
+EC_virtualenv/

@@ -1,5 +1,5 @@
 class WordManager:
-    def __init__(self):
+    def __init__(self, textBaseDirName):
         self.subjectiveList = []
         self.verbList = []
         self.objectiveList = []
@@ -9,7 +9,7 @@ class WordManager:
         self.verbVal = []
         self.objectiveVal = []
 
-        self.textBaseDirName = "TextBase_Food/"
+        self.textBaseDirName = textBaseDirName+"/"
 
         self.initializeManager()
 
