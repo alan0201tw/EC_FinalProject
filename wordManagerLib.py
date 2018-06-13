@@ -54,8 +54,11 @@ class WordManager:
         # TODO : implementation
 
         # edit this to test!
-        targetEmotion = [ 0.0 , 1.0 , 0.0 ]
-        chromosomeEmotion = [ 0.0 , 0.0 , 0.0 ]
+        vectorLength = len(self.objectiveVal[0])
+        targetEmotion = [0.0 for i in range(vectorLength)]
+        chromosomeEmotion = [0.0 for i in range(vectorLength)]
+        # default set second element of vector as the target emotion
+        targetEmotion[1] = 1.0
         phraseCount = 0.0
 
         for sentenceIndex in range(len(sentences)) :
@@ -65,7 +68,9 @@ class WordManager:
             phraseCount += 1.0
 
             for followUpIndex in range(len(sentences[sentenceIndex].followUpPhrases)) :
-                t_emotionVector = self.VectorMultiplication(self.objectiveVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].objectiveIndex],self.verbVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].verbIndex])
+                t_emotionVector = self.VectorMultiplication(
+                    self.objectiveVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].objectiveIndex],
+                    self.verbVal[sentences[sentenceIndex].followUpPhrases[followUpIndex].verbIndex])
                 chromosomeEmotion = [x + y for x, y in zip(t_emotionVector, chromosomeEmotion)]
                 phraseCount += 1.0
 

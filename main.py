@@ -29,11 +29,10 @@ def main(textBaseDirName) :
         bestFitness = []
         bestChromosome = []
         while generationIndex < 100 :
-            """
-            print( "--------GENERATION " , generationIndex , "--------" )
-            print( "Best fitness is :" , world.GetBestFitness() )
-            print( "Best chromosome is :" , world.GetBestFitnesschromosome().toString() )
-            """
+            if i_run == 0:
+                print( "--------GENERATION " , generationIndex , "--------" )
+                print( "Best fitness is :" , world.GetBestFitness() )
+                print( "Best chromosome is :" , world.GetBestFitnesschromosome().toString() )
             #print( "------------------------------------------------" )
             bestFitness.append(world.GetBestFitness())
             bestChromosome.append(world.GetBestFitnesschromosome().toString())
@@ -55,6 +54,6 @@ def main(textBaseDirName) :
 
 if __name__ == "__main__" :
     main("TextBase_Drinks")
-    main("TextBase")
-    main("TextBase_Animal")
+    #main("TextBase")
+    #main("TextBase_Animal")
     main("TextBase_Food")

@@ -176,7 +176,7 @@ class Chromosome:
 
             # update fitness value
             self.fitness = self.wordmanager.EvaluateChromesomeEmotion(self.sentences)
-    
+    """
     def compareTo(self, other):
         myFitness = self.fitness
         otherFitness = other.getFitness()
@@ -187,7 +187,7 @@ class Chromosome:
             return 1
         else:
             return -1
-
+    """
     def toString(self):
         sentencesList = [i.toString(self.wordmanager) for i in self.sentences]
         return "".join(sentencesList)
